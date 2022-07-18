@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="w-full flex justify-between">
             <div class="text-3xl">{{ __('Users') }}</div>
-{{--            @can('user-create')--}}
+            @can('user-create')
                 <div>
                     <a
                         href="{{ route('admin.user.create') }}"
@@ -11,7 +11,7 @@
                         + {{ __('Create User') }}
                     </a>
                 </div>
-{{--            @endcan--}}
+            @endcan
         </div>
     </x-slot>
 
@@ -20,9 +20,7 @@
             <thead>
             <tr>
                 <th>{{ __('ID') }}</th>
-                <th>{{ __('Username') }}</th>
                 <th>{{ __('Name') }}</th>
-                <th>{{ __('Phone') }}</th>
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Action') }}</th>
             </tr>
@@ -39,7 +37,6 @@
                     url: '{{ route('admin.user.index') }}',
                     dataSrc(response) {
                         response.data.map(function (item) {
-                            item.referrer = item.referrer ?? {username: ''};
                             item.action = actionIcons({
                                 'show': '{{ route('admin.user.show', '@') }}'.replace('@', item.id),
                                 @can('user-update')
@@ -57,9 +54,7 @@
                 },
                 columns: [
                     {data: 'id'},
-                    {data: 'username'},
                     {data: 'name'},
-                    {data: 'phone'},
                     {data: 'email'},
                     {data: 'action', orderable: false, searchable: false},
                 ]

@@ -11,13 +11,8 @@
         @csrf
         @method('PUT')
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
-            <x-labeled-input name="username" readonly value="{{ $user->username }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input name="name" required value="{{ $user->name }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="phone" required value="{{ $user->phone }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input name="email" required value="{{ $user->email }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="nid" label="NID" required value="{{ $user->nid }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="referrer" readonly value="{{ optional($user->referrer)->username }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input type="date" name="birthday" required value="{{ optional($user->birthday)->toDateString() }}" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="password" name="password" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="password" name="password_confirmation" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="file" name="avatar" class="w-full p-1 md:w-1/2 lg:w-1/3"/>

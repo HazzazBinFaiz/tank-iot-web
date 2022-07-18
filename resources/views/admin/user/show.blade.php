@@ -15,26 +15,8 @@
         <div class="w-full md:w-1/2 lg:w-1/3">
             <table>
                 <tr>
-                    <td class="p-2 font-semibold">{{ __('Username') }}</td>
-                    <td class="p-2">{{ $user->username }}</td>
-                </tr>
-                <tr>
                     <td class="p-2 font-semibold">{{ __('Name') }}</td>
                     <td class="p-2">{{ $user->name }}</td>
-                </tr>
-                <tr>
-                    <td class="p-2 font-semibold">{{ __('Phone') }}</td>
-                    <td class="p-2">{{ $user->phone }}</td>
-                </tr>
-                <tr>
-                    <td class="p-2 font-semibold">{{ __('Phone Verified') }}</td>
-                    <td class="p-2 flex">
-                        @if($user->hasVerifiedPhone())
-                            <div class="rounded bg-green-300 py-1 px-2 text-xs font-semibold text-green-800">{{ __('Yes') }}</div>
-                        @else
-                            <div class="rounded bg-red-300 py-1 px-2 text-xs font-semibold text-red-800">{{ __('No') }}</div>
-                        @endif
-                    </td>
                 </tr>
                 <tr>
                     <td class="p-2 font-semibold">{{ __('Email') }}</td>

@@ -10,10 +10,6 @@
                 </div>
                 <table class="w-full text-sm">
                     <tr>
-                        <td class="p-2 border-t border-b font-semibold">{{ __('Username') }}</td>
-                        <td class="p-2 border-t border-b">{{ auth()->user()->username }}</td>
-                    </tr>
-                    <tr>
                         <td class="p-2 border-t border-b font-semibold">{{ __('Name') }}</td>
                         <td class="p-2 border-t border-b">{{ auth()->user()->name }}</td>
                     </tr>

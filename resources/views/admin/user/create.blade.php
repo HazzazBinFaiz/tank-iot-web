@@ -10,13 +10,8 @@
     <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
-            <x-labeled-input name="username" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input name="name" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="phone" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input name="email" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="nid" label="NID" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input name="referrer" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
-            <x-labeled-input type="date" name="birthday" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="password" name="password" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="password" name="password_confirmation" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
             <x-labeled-input type="file" accept="image/jpeg,image/png" name="avatar" class="w-full p-1 md:w-1/2 lg:w-1/3"/>
