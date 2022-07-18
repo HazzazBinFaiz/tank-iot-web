@@ -1,6 +1,6 @@
-## Lekoil
+## Laravel Starter template
 
-Lekoil is a web application based on laravel web framework.
+One guard only user, with laratrust, enum.
 
 ## Copyright
 
