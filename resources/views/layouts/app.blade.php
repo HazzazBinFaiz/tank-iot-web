@@ -163,6 +163,11 @@
             </div>
         </header>
         <main class="flex-grow lg:ml-64">
+            @if(isset($header) && $header)
+                <div class="w-full p-4 bg-white">
+                    {{ $header }}
+                </div>
+            @endif
             @if(session(\App\Mixin\ResponseMixin::SUCCESS_MESSAGE_SESSION_KEY))
                 <x-alert type="success">{{ session(\App\Mixin\ResponseMixin::SUCCESS_MESSAGE_SESSION_KEY) }}</x-alert>
             @endif
@@ -200,5 +205,6 @@
         });
     };
 </script>
+{{ $script ?? '' }}
 </body>
 </html>

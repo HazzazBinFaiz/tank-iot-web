@@ -32,15 +32,19 @@
     /* Set the defaults for DataTables initialisation */
     $.extend(true, DataTable.defaults, {
         dom:
-            "<'flex'<'w-full md:w-1/2'l><'w-full text-right md:w-1/2'f>>" +
+            "<'flex flex-wrap'<'w-full text-center sm:w-1/2 sm:text-left sm:my-1'l><'w-full flex justify-center my-1 sm:justify-end sm:w-1/2'f>>" +
             "<'flex my-4'<'w-full overflow-y-auto'tr>>" +
-            "<'flex'<'w-full md:w-1/3'i><'w-full md:w-2/3 text-right'p>>",
-        renderer: 'tailwindcss'
+            "<'flex flex-wrap'<'w-full my-2 sm:w-1/3'i><'w-full sm:w-2/3 text-right'p>>",
+
+        /*dom: "<'flex my-4'<'w-full overflow-y-auto'tr>>" +
+            "<'flex justify-center'<p>>",*/
+        renderer: 'tailwindcss',
+        autoWidth: false
     });
 
     /* Default class modification */
     $.extend(DataTable.ext.classes, {
-        sWrapper: "w-full",
+        sWrapper: "w-full whitespace-nowrap drag-scroll",
         sTable: "w-full datatable bg-white",
         sFilter: "font-semibold",
         sFilterInput: "p-2 ml-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
@@ -84,41 +88,42 @@
                 } else {
                     btnDisplay = '';
                     btnClass = '';
+                    const disabledClass = ' bg-gray-200 cursor-not-allowed pointer-events-none'
 
                     switch (button) {
                         case 'ellipsis':
                             btnDisplay = '&#x2026;';
-                            btnClass = 'disabled';
+                            btnClass = disabledClass;
                             break;
 
                         case 'first':
                             btnDisplay = lang.sFirst;
                             btnClass = button + (page > 0 ?
-                                '' : ' disabled');
+                                '' : disabledClass);
                             break;
 
                         case 'previous':
                             btnDisplay = lang.sPrevious;
                             btnClass = button + (page > 0 ?
-                                '' : ' disabled');
+                                '' : disabledClass);
                             break;
 
                         case 'next':
                             btnDisplay = lang.sNext;
                             btnClass = button + (page < pages - 1 ?
-                                '' : ' disabled');
+                                '' : disabledClass);
                             break;
 
                         case 'last':
                             btnDisplay = lang.sLast;
                             btnClass = button + (page < pages - 1 ?
-                                '' : ' disabled');
+                                '' : disabledClass);
                             break;
 
                         default:
                             btnDisplay = button + 1;
                             btnClass = page === button ?
-                                'active' : '';
+                                disabledClass : '';
                             break;
                     }
 

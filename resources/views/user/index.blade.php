@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="w-full flex justify-between">
-            <div class="text-3xl">{{ __('Users') }}</div>
+            <div class="text-xl">{{ __('Users') }}</div>
             @can('user-create')
                 <div>
                     <a
                         href="{{ route('user.create') }}"
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                        class="bg-transparent text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded"
                     >
                         + {{ __('Create User') }}
                     </a>
