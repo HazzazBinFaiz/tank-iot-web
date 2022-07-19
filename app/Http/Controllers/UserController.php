@@ -24,6 +24,7 @@ class UserController extends Controller
 
     public function create()
     {
+        return response()->report(true);
         return view('user.create');
     }
 
@@ -37,7 +38,7 @@ class UserController extends Controller
             'avatar' => 'nullable|image|max:2048'
         ]);
 
-        return response()->report(User::create($validated), 'User created successfully');
+        return response()->report(User::create($validated));
     }
 
 
@@ -66,7 +67,7 @@ class UserController extends Controller
             unset($validated['password']);
         }
 
-        return response()->report($user->update($validated), 'User updated successfully');
+        return response()->report($user->update($validated));
     }
 
     public function destroy(User $user)
@@ -74,7 +75,7 @@ class UserController extends Controller
         if($user->id === Auth::id()) {
             return response()->error('Can\'t delete self');
         }
-        return response()->report($user->delete(), 'User deleted successfully');
+        return response()->report($user->delete());
     }
 
     public function portal(User $user)

@@ -2,6 +2,9 @@
 
 namespace App\Mixin;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 const ERRORMESSAGE = 'Something went wrong';
 
 class ResponseMixin
@@ -11,7 +14,20 @@ class ResponseMixin
 
     public static function report(): callable
     {
-        return function ($condition, $successMessage, $statusCode = 200, $errorMessage = ERRORMESSAGE, $redirectAddress = null) {
+        return function ($condition, $successMessage = null, $statusCode = 200, $errorMessage = ERRORMESSAGE, $redirectAddress = null) {
+            if ($successMessage === null) {
+                $trace = Arr::first(debug_backtrace(), function ($trace) {
+                    return Str::contains($trace['class'], 'Controller');
+                });
+                throw_unless(
+                    $trace && in_array($trace['function'], ['store', 'update', 'destroy']),
+                    new \Exception('Can not guess success message. please provide one in ->report(condition, {here})')
+                );
+                $successMessage = Str::afterLast(Str::beforeLast($trace['class'], 'Controller'), '\\')
+                    .' '. ['store' => 'created', 'update' => 'updated', 'destroy' => 'deleted'][$trace['function']]
+                    .' successfully';
+            }
+
             if (request()->wantsJson()) {
                 if ($condition) {
                     return response()->json([
@@ -43,8 +59,8 @@ class ResponseMixin
 
     public static function error(): callable
     {
-        return function ($message, $statusCode = 200, $redirectAddress = null) {
-            return $this->report(false, '', $statusCode, $message, $redirectAddress);
+        return function ($message = null, $statusCode = 200, $redirectAddress = null) {
+            return $this->report(false, '', $statusCode, $message ?? ERRORMESSAGE, $redirectAddress);
         };
     }
 
