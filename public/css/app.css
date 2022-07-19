@@ -1258,6 +1258,9 @@ select {
 .pr-6 {
   padding-right: 1.5rem;
 }
+.pb-4 {
+  padding-bottom: 1rem;
+}
 .text-left {
   text-align: left;
 }

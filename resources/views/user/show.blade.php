@@ -1,18 +1,23 @@
 <x-app-layout :title="__('User Details')">
-
-
-    <div class="py-6 flex justify-between">
-        <div class="text-3xl">{{ __('User Details') }}</div>
-        <div>
-            <a class="text-primary-700 underline font-semibold" href="{{ route('user.index') }}">{{ __('Users') }}</a>
+    <x-slot name="header">
+        <div class="w-full flex justify-between">
+            <div class="text-xl">{{ __('User Details') }}</div>
+            @can('user-read')
+                <div>
+                    <a
+                        href="{{ route('user.index') }}"
+                        class="bg-transparent text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded"
+                    >{{ __('Users') }}</a>
+                </div>
+            @endcan
         </div>
-    </div>
+    </x-slot>
 
-    <div class="w-full bg-white flex flex-wrap justify-end p-4">
-        <div class="w-full md:w-1/2 lg:w-1/3 flex justify-center p-2">
+    <div class="w-full bg-white flex flex-wrap p-4">
+        <div class="w-full md:w-1/2 flex justify-center p-2">
             <img class="h-64 w-64" src="{{ $user->avatar }}" alt="Avatar of {{ $user->name }}"/>
         </div>
-        <div class="w-full md:w-1/2 lg:w-1/3">
+        <div class="w-full md:w-1/2">
             <table>
                 <tr>
                     <td class="p-2 font-semibold">{{ __('Name') }}</td>

@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -22,13 +24,20 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('user.create');
     }
 
 
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'avatar' => 'nullable|image|max:2048'
+        ]);
+
+        return response()->report(User::create($validated), 'User created successfully');
     }
 
 
@@ -39,16 +48,32 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        //
+        return view('user.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required','email', Rule::unique('users')->ignore($user->id)],
+            'password' => 'nullable|confirmed',
+            'avatar' => 'nullable|image|max:2048'
+        ]);
+
+        if ($validated['password']) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        return response()->report($user->update($validated), 'User updated successfully');
     }
 
     public function destroy(User $user)
     {
+        if($user->id === Auth::id()) {
+            return response()->error('Can\'t delete self');
+        }
         return response()->report($user->delete(), 'User deleted successfully');
     }
 
