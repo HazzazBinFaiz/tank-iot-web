@@ -31,6 +31,10 @@ class CaptchaCodeChecker
      */
     public function handle(Request $request, Closure $next)
     {
+        if(config('app.env') === 'local') {
+            return $next($request);
+        }
+
         if ($request->has(['code','_code'])) {
             if ($this->checkCode($request->get('code'), $request->get('_code'))) {
                 return $next($request);

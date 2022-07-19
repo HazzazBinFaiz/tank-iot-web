@@ -32,9 +32,11 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <div class="w-full">
-                <x-captcha />
-            </div>
+            @if(config('app.env') !== 'local')
+                <div class="w-full">
+                    <x-captcha />
+                </div>
+            @endif
 
             <!-- Remember Me -->
             <div class="block mt-4">
