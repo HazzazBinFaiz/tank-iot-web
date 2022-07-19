@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\ImageField;
+use App\Traits\DeletesImage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +12,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use HasFactory, LaratrustUserTrait, Notifiable;
+    use HasFactory, LaratrustUserTrait, Notifiable, DeletesImage;
 
     /**
      * The attributes that are mass assignable.
@@ -36,15 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'avatar' => ImageField::class.':avatar,images/avatar.png',
         'email_verified_at' => 'datetime',
     ];
-
-    public function getAvatarAttribute($user){
-        if(isset($user)){
-            return  \App\Lib\Image::url($user);
-        }
-        else{
-            return  asset('images/avatar.png');
-        }
-    }
 }
