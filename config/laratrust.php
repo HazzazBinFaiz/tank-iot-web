@@ -73,7 +73,7 @@ return [
     |
     */
     'user_models' => [
-        'admins' => \App\Models\Admin::class
+        'users' => \App\Models\User::class
     ],
 
     /*
@@ -194,7 +194,7 @@ return [
              * If the message content is empty it won't be added to the redirection.
              */
             'redirect' => [
-                'url' => '/admin',
+                'url' => \App\Providers\RouteServiceProvider::HOME,
                 'message' => [
                     'key' => 'error',
                     'content' => ''
@@ -279,7 +279,7 @@ return [
         | will be accessible from.
         |
         */
-        'path' => 'admin/permission',
+        'path' => 'access-management',
 
         /*
         |--------------------------------------------------------------------------
@@ -289,7 +289,7 @@ return [
         | The route where the go back link should point
         |
         */
-        'go_back_route' => '/admin',
+        'go_back_route' => \App\Providers\RouteServiceProvider::HOME,
 
         /*
         |--------------------------------------------------------------------------
@@ -299,7 +299,7 @@ return [
         | These middleware will get attached onto each Laratrust panel route.
         |
         */
-        'middleware' => ['web','auth:admin','role:admin'],
+        'middleware' => ['web','auth','role:admin'],
 
         /*
         |--------------------------------------------------------------------------

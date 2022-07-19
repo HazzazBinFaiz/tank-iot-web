@@ -1,10 +1,10 @@
-<x-admin-app-layout :title="__('User Details')">
+<x-app-layout :title="__('User Details')">
 
 
     <div class="py-6 flex justify-between">
         <div class="text-3xl">{{ __('User Details') }}</div>
         <div>
-            <a class="text-primary-700 underline font-semibold" href="{{ route('admin.user.index') }}">{{ __('Users') }}</a>
+            <a class="text-primary-700 underline font-semibold" href="{{ route('user.index') }}">{{ __('Users') }}</a>
         </div>
     </div>
 
@@ -35,4 +35,4 @@
             </table>
         </div>
     </div>
-</x-admin-app-layout>
+</x-app-layout>

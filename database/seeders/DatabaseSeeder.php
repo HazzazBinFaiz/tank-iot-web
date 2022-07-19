@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
-        tap(
+        $user = tap(
             User::create([
                 'name' => 'User',
                 'email' => 'user@gmail.com',
@@ -27,14 +27,9 @@ class DatabaseSeeder extends Seeder
             ])
         )->markEmailAsVerified();
 
-        $admin = Admin::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678')
-        ]);
 
         $this->call(LaratrustSeeder::class);
 
-        $admin->attachRole(Role::whereName('admin')->first());
+        $user->attachRole(Role::whereName('admin')->first());
     }
 }

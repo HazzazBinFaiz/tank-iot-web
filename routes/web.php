@@ -25,6 +25,7 @@ Route::resource('profile-update', \App\Http\Controllers\ProfileUpdateController:
     ->only(['create','store']);
 
 Route::middleware('auth')->group(function(){
+    Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('password-update', \App\Http\Controllers\PasswordUpdateController::class)
         ->only(['create','store']);
     Route::resource('profile-update', \App\Http\Controllers\ProfileUpdateController::class)
@@ -35,4 +36,3 @@ Route::get('portal/{user}', \App\Http\Controllers\PortalController::class)->name
 
 
 require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';

@@ -54,17 +54,31 @@
                 >
                     <span>{{ __('Dashboard') }}</span>
                 </a>
-            </div>
-            <div class="w-full flex flex-col">
                 <a
                     href="{{ route('profile-update.create') }}"
                     class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
                 >
                     <span>{{ __('Profile') }}</span>
                 </a>
+                @can('user-read')
+                <a
+                    href="{{ route('user.index') }}"
+                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
+                >
+                    <span>{{ __('User') }}</span>
+                </a>
+                @endcan
             </div>
             <div class="w-full p-3 mt-4 font-semibold">Security</div>
             <div class="w-full flex flex-col">
+                @role('admin')
+                <a
+                    href="{{ route('laratrust.roles-assignment.index') }}"
+                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400 {{ request()->is('*/permission/*') ? 'active' : '' }}"
+                >
+                    <span>{{ __('Access management') }}</span>
+                </a>
+                @endrole
                 <a
                     href="{{ route('password-update.create') }}"
                     class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"

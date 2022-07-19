@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +16,7 @@ class UserController extends Controller
             return datatables(User::query())->toJson();
         }
 
-        return view('admin.user.index');
+        return view('user.index');
     }
 
 
@@ -35,7 +34,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.user.show', compact('user'));
+        return view('user.show', compact('user'));
     }
 
     public function edit(User $user)

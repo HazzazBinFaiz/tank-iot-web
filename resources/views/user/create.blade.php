@@ -1,13 +1,13 @@
-<x-admin-layout :title="__('Create User')">
+<x-app-layout :title="__('Create User')">
 
     <div class="py-6 flex justify-between">
         <div class="text-3xl">{{ __('Create User') }}</div>
         <div>
-            <a class="text-primary-700 underline font-semibold" href="{{ route('admin.user.index') }}">{{ __('Users') }}</a>
+            <a class="text-primary-700 underline font-semibold" href="{{ route('user.index') }}">{{ __('Users') }}</a>
         </div>
     </div>
 
-    <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
             <x-labeled-input name="name" required class="w-full p-1 md:w-1/2 lg:w-1/3"/>
@@ -20,4 +20,4 @@
             </div>
         </div>
     </form>
-</x-admin-layout>
+</x-app-layout>

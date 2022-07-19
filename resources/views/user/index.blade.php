@@ -1,11 +1,11 @@
-<x-admin-app-layout>
+<x-app-layout>
     <x-slot name="header">
         <div class="w-full flex justify-between">
             <div class="text-3xl">{{ __('Users') }}</div>
             @can('user-create')
                 <div>
                     <a
-                        href="{{ route('admin.user.create') }}"
+                        href="{{ route('user.create') }}"
                         class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     >
                         + {{ __('Create User') }}
@@ -34,17 +34,17 @@
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: '{{ route('admin.user.index') }}',
+                    url: '{{ route('user.index') }}',
                     dataSrc(response) {
                         response.data.map(function (item) {
                             item.action = actionIcons({
-                                'show': '{{ route('admin.user.show', '@') }}'.replace('@', item.id),
+                                'show': '{{ route('user.show', '@') }}'.replace('@', item.id),
                                 @can('user-update')
-                                'portal': '{{ route('admin.user.portal', '@') }}'.replace('@', item.id),
-                                'edit': '{{ route('admin.user.edit', '@') }}'.replace('@', item.id),
+                                'portal': '{{ route('user.portal', '@') }}'.replace('@', item.id),
+                                'edit': '{{ route('user.edit', '@') }}'.replace('@', item.id),
                                 @endcan
                                 @can('user-delete')
-                                'delete': '{{ route('admin.user.destroy', '@') }}'.replace('@', item.id),
+                                'delete': '{{ route('user.destroy', '@') }}'.replace('@', item.id),
                                 @endcan
                             });
                             return item;
@@ -61,4 +61,4 @@
             });
         </script>
     </x-slot>
-</x-admin-app-layout>
+</x-app-layout>

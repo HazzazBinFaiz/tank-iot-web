@@ -1,13 +1,13 @@
-<x-admin-layout :title="__('Edit User')">
+<x-layout :title="__('Edit User')">
 
     <div class="py-6 flex justify-between">
         <div class="text-3xl">{{ __('Edit User') }}</div>
         <div>
-            <a class="text-primary-700 underline font-semibold" href="{{ route('admin.user.index') }}">{{ __('Users') }}</a>
+            <a class="text-primary-700 underline font-semibold" href="{{ route('user.index') }}">{{ __('Users') }}</a>
         </div>
     </div>
 
-    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
@@ -21,4 +21,4 @@
             </div>
         </div>
     </form>
-</x-admin-layout>
+</x-layout>
