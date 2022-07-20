@@ -1,6 +1,6 @@
 @props(['href' => null, 'text'])
 
-@if($slot->isEmpty())
+@if($href)
     <a
         href="{{ $href }}"
         class="w-full py-2 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
