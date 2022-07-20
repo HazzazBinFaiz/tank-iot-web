@@ -32,7 +32,7 @@
                 @elseif($field->type === 'select')
                     <x-labeled-select :name="$field->name" :required="$field->required" :class="$inputClass">
                         @foreach($field->options as $value => $label)
-                            <option @if(old($field->name, $model->{$field->name} instanceof \BenSampo\Enum\Enum ? $model->{$field->name}->value : $model->{$field->name}) == $value) selected
+                            <option @if(old($field->name, $model->{$field->getValueAccessor()} instanceof \BenSampo\Enum\Enum ? $model->{$field->getValueAccessor()}->value : $model->{$field->getValueAccessor()}) == $value) selected
                                     @endif value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                     </x-labeled-select>

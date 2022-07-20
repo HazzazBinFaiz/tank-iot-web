@@ -10,6 +10,7 @@ class Field
 {
     public $type;
     public $name;
+    public $valueAccessor;
     public $required = false;
     public $options = [];
 
@@ -35,6 +36,12 @@ class Field
         return $this;
     }
 
+    public function valueAccessor($valueAccessor)
+    {
+        $this->valueAccessor = $valueAccessor;
+        return $this;
+    }
+
     public function options($options, $callable = null)
     {
         if ($callable instanceof \Closure) {
@@ -51,5 +58,10 @@ class Field
             });
         }
         return $this;
+    }
+
+    public function getValueAccessor()
+    {
+        return $this->valueAccessor ?? $this->name;
     }
 }

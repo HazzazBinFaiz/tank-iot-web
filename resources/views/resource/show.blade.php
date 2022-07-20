@@ -21,7 +21,11 @@
                 @foreach($columns as $column)
                     <tr>
                         <td class="p-2 font-semibold">{{ __((string) Str::of($column)->title()->replace('_', ' ')) }}</td>
-                        <td class="p-2">{{ $model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column} }}</td>
+                        @if(is_string($column))
+                            <td class="p-2">{{ $model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column} }}</td>
+                        @else
+                            <td class="p-2">{{ $column->value ?? ($model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column}) }}</td>
+                        @endisset
                     </tr>
                 @endforeach
             </table>
