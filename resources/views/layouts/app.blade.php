@@ -45,46 +45,19 @@
                     class="w-full text-slate-300 font-semibold text-right md:text-left">{{ auth()->user()->name }}</div>
             </div>
         </div>
-        <div class="w-full flex flex-col text-slate-300 nav-links">
-            <div class="w-full p-3 mt-4 font-semibold">General</div>
+        <div class="w-full flex flex-col text-slate-300 nav-links mt-8">
             <div class="w-full flex flex-col">
-                <a
-                    href="{{ route('dashboard') }}"
-                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
-                >
-                    <span>{{ __('Dashboard') }}</span>
-                </a>
-                <a
-                    href="{{ route('profile-update.create') }}"
-                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
-                >
-                    <span>{{ __('Profile') }}</span>
-                </a>
+                <x-navigation-link :href="route('dashboard')" :text="__('Dashboard')" />
+                <x-navigation-link :href="route('profile-update.create')" :text="__('Profile')" />
                 @can('user-read')
-                <a
-                    href="{{ route('user.index') }}"
-                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
-                >
-                    <span>{{ __('User') }}</span>
-                </a>
+                    <x-navigation-link :href="route('user.index')" :text="__('User')" />
                 @endcan
-            </div>
-            <div class="w-full p-3 mt-4 font-semibold">Security</div>
-            <div class="w-full flex flex-col">
-                @role('admin')
-                <a
-                    href="{{ route('laratrust.roles-assignment.index') }}"
-                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400 {{ request()->is('*/permission/*') ? 'active' : '' }}"
-                >
-                    <span>{{ __('Access management') }}</span>
-                </a>
-                @endrole
-                <a
-                    href="{{ route('password-update.create') }}"
-                    class="w-full py-3 px-4 flex justify-between items-center hover:bg-slate-900 border-l-4 border-transparent hover:border-teal-400"
-                >
-                    <span>{{ __('Update password') }}</span>
-                </a>
+                <x-navigation-link :text="__('Security')">
+                    @role('admin')
+                    <x-navigation-link :href="route('laratrust.roles-assignment.index')" :text="__('Access management')" />
+                    @endrole
+                    <x-navigation-link :href="route('password-update.create')" :text="__('Update password')" />
+                </x-navigation-link>
             </div>
         </div>
     </sidebar>
