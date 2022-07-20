@@ -22,9 +22,9 @@
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
             @php
             $fieldCount = count($fields);
-            if ($fieldCount === 1) $inputClass = 'w-full';
-            elseif ($fieldCount < 9) $inputClass = 'w-full md:w-1/2';
-            else $inputClass = 'w-full md:w-1/2 lg:w-1/3';
+            if ($fieldCount === 1) $inputClass = 'w-full p-1';
+            elseif ($fieldCount < 9) $inputClass = 'w-full p-1 md:w-1/2';
+            else $inputClass = 'w-full p-1 md:w-1/2 lg:w-1/3';
             @endphp
             @foreach($fields as $field)
                 @if($field->type === 'text')
