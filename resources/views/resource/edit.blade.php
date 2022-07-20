@@ -20,11 +20,17 @@
         @csrf
         @method('PUT')
         <div class="flex flex-wrap justify-center w-full bg-white p-4">
+            @php
+                $fieldCount = count($fields);
+                if ($fieldCount === 1) $inputClass = 'w-full';
+                elseif ($fieldCount < 9) $inputClass = 'w-full md:w-1/2';
+                else $inputClass = 'w-full md:w-1/2 lg:w-1/3';
+            @endphp
             @foreach($fields as $field)
                 @if($field->type === 'text')
-                    <x-labeled-input :name="$field->name" :required="$field->required" :value="$model->{$field->name}" class="w-full p-1 md:w-1/2"/>
+                    <x-labeled-input :name="$field->name" :required="$field->required" :value="$model->{$field->name}" :class="$inputClass"/>
                 @elseif($field->type === 'select')
-                    <x-labeled-select :name="$field->name" :required="$field->required" class="w-full p-1 md:w-1/2">
+                    <x-labeled-select :name="$field->name" :required="$field->required" :class="$inputClass">
                         @foreach($field->options as $value => $label)
                             <option @if(old($field->name, $model->{$field->name} instanceof \BenSampo\Enum\Enum ? $model->{$field->name}->value : $model->{$field->name}) == $value) selected
                                     @endif value="{{ $value }}">{{ $label }}</option>
