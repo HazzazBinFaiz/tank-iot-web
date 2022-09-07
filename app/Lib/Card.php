@@ -20,7 +20,7 @@ class Card
         return $this;
     }
 
-    public static function make(string $title, string $value, array $kv){
+    public static function make(string $title, string $value, array $kv=[]){
         return (new self($title, $value))->setKV($kv);
     }
 }
