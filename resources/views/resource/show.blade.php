@@ -1,14 +1,14 @@
-<x-app-layout :title="__(Str::studly($name).' Details')">
+<x-app-layout :title="$title = __($heading['show'] ?? Str::of($name)->title()->replace(['_', '-'], ' ').' Details')">
     <x-slot name="header">
         <div class="w-full flex justify-between">
-            <div class="text-xl">{{ __(Str::studly($name).' Details') }}</div>
+            <div class="text-xl">{{ $title }}</div>
             @if(Route::has($name.'.index'))
                 @can($name.'-read')
                     <div>
                         <a
                             href="{{ route($name.'.index') }}"
                             class="bg-transparent text-sm hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded"
-                        >{{ __((string) Str::of($name)->studly()->plural()) }}</a>
+                        >{{ __($heading['index'] ?? (string) Str::of($name)->title()->replace(['_', '-'], ' ')->plural()) }}</a>
                     </div>
                 @endcan
             @endif
@@ -24,7 +24,7 @@
                         @if(is_string($column))
                             <td class="p-2">{{ $model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column} }}</td>
                         @else
-                            <td class="p-2">{{ $column->value ?? ($model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column}) }}</td>
+                            <td class="p-2">{{ $column instanceof \App\Lib\Column ? $column->getValue($model) : ($model->{$column} instanceof \BenSampo\Enum\Enum ? $model->{$column}->key : $model->{$column}) }}</td>
                         @endisset
                     </tr>
                 @endforeach

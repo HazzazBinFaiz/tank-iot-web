@@ -1,8 +1,8 @@
-@props(['name', 'label' => null, 'required' => false, 'disabled' => false])
+@props(['name', 'label' => null, 'required' => false, 'disabled' => false, 'extraAttributes' => []])
 
 <div class="{{ $attributes['class'] }}">
-    <label class="block font-medium text-sm text-gray-700 font-semibold py-2" for="{{ $name }}">{{ __($label ?? Str::of($name)->replace(['_','-'], ' ')->title().'') }}@if($required)<span class="ml-2 text-red-500">*</span>@endif</label>
-    <select id="{{ $name }}" name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} {{ $required ? 'required' : '' }} {{ $attributes->filter(fn ($value, $key) => $key !== 'class') }} class="rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full p-2 border-2 border-gray-400">
+    <label class="block font-medium text-sm text-gray-700 font-semibold py-2" for="{{ $name }}">{{ __($label ?: Str::of($name)->replace(['_','-'], ' ')->title().'') }}@if($required)<span class="ml-2 text-red-500">*</span>@endif</label>
+    <select id="{{ $name }}" name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} {{ $required ? 'required' : '' }} {{ $attributes->filter(function($value, $key){ return $key !== 'class';})->merge($extraAttributes) }} class="rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full p-2 border-2 border-gray-400">
         {!! $slot !!}
     </select>
     @error($name)
