@@ -16,11 +16,6 @@ class ImageField implements CastsAttributes, Castable
     {
         $this->path = $path ?? 'images';
         $this->fallbackImage = $fallbackImage ?? 'images/no-image.png';
-        
-        throw_unless(
-            in_array(DeletesImage::class, class_uses($model)),
-            new \Exception('Model ' . get_class($model) . ' is not using DeletesImage trait. use it in order to delete image while deleting model')
-        );
     }
 
     /**
@@ -34,6 +29,11 @@ class ImageField implements CastsAttributes, Castable
      */
     public function get($model, string $key, $value, array $attributes)
     {
+        throw_unless(
+            in_array(DeletesImage::class, class_uses($model)),
+            new \Exception('Model ' . get_class($model) . ' is not using DeletesImage trait. use it in order to delete image while deleting model')
+        );
+        
         return $value ? Image::url($value) : asset($this->fallbackImage);
     }
 
@@ -48,6 +48,11 @@ class ImageField implements CastsAttributes, Castable
      */
     public function set($model, string $key, $value, array $attributes)
     {
+        throw_unless(
+            in_array(DeletesImage::class, class_uses($model)),
+            new \Exception('Model ' . get_class($model) . ' is not using DeletesImage trait. use it in order to delete image while deleting model')
+        );
+        
         if (isset($attributes[$key]) && $attributes[$key]) {
             Image::delete($attributes[$key]);
         }
