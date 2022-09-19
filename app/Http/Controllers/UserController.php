@@ -24,7 +24,6 @@ class UserController extends Controller
 
     public function create()
     {
-        return response()->report(true);
         return view('user.create');
     }
 
