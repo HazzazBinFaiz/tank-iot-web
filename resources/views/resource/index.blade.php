@@ -43,16 +43,6 @@
                 processing: true,
                 ajax: {
                     url: '{{ route($name.'.index', isset($appendParameters) ? request()->only($appendParameters) : []) }}',
-                    beforeSend: function(){
-                        this.url = encodeURI(
-                            decodeURI(this.url).split('&').map(segment => {
-                                if (segment.startsWith('search[value]=') && segment.length > 'search[value]='.length && segment.match(/search\[value\]=(GM|DGM|DC|TC|FA)\d+/)) {
-                                    return segment.replace(/search\[value\]=(GM|DGM|DC|TC|FA)(\d+)/, 'search[value]=$2')
-                                }
-                                return segment
-                            }).join('&')
-                        );
-                    },
                     dataSrc(response) {
                         response.data.map(function (item) {
                             item.action = actionIcons({
