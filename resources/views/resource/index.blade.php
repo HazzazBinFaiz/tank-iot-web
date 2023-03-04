@@ -77,6 +77,9 @@
                         return response.data;
                     }
                 },
+                @isset($order)
+                order: @js($order),
+                @endisset
                 columns: [
                     @foreach($columns as $column)
                         @if($column instanceof \App\Lib\Column)
