@@ -5,10 +5,11 @@ namespace App\Lib;
 class Column
 {
     public $name;
-    public $value;
-    public $visible = true;
+    protected $value;
     public $dataOrder = true;
     public $dataSearch = true;
+    public $label = null;
+    public $visible = true;
 
     public function __construct($name, $value = null)
     {
@@ -16,24 +17,40 @@ class Column
         $this->value = $value;
     }
 
-    public static function text($name, $value = null)
+    public static function make($name, $value = null)
     {
         return new self($name, $value);
     }
 
-    public function setVisible($visible = true)
+    public function getValue($model)
     {
-        $this->visible = $visible;
+        if ($this->value) {
+            return is_callable($this->value) ? call_user_func($this->value, $model) : $this->value;
+        }
+        return $model->{$this->name};
+    }
+
+    public function label($label)
+    {
+        $this->label = $label;
         return $this;
     }
 
-    public function dataOrder($order) {
+    public function dataSearch($search = true)
+    {
+        $this->dataSearch = $search;
+        return $this;
+    }
+
+    public function dataOrder($order = true)
+    {
         $this->dataOrder = $order;
         return $this;
     }
 
-    public function dataSearch($search) {
-        $this->dataSearch = $search;
+    public function visible($visible)
+    {
+        $this->visible = $visible;
         return $this;
     }
 
