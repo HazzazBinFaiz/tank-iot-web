@@ -5,6 +5,7 @@ namespace App\Lib;
 use BenSampo\Enum\Enum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * @method static Field select($name)
