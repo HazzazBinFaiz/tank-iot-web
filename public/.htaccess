@@ -23,7 +23,23 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
     
-    RewriteRule ^(?!index\.php$).*\.php$ - [F,L]
+    RewriteRule ^(?!index\.php$).*\.(php\d*|phtml)$ index.php [L]
 </IfModule>
 
-Header add Strict-Transport-Security "max-age=86400;"
+<IfModule mod_expires.c>
+    <FilesMatch "\.(jpe?g|png|gif|js|css)$">
+        ExpiresActive On
+        ExpiresDefault "access plus 1 week"
+    </FilesMatch>
+</IfModule>
+
+<IfModule headers_module>
+    Header add Strict-Transport-Security "max-age=2592000;"
+    Header add X-Frame-Options SAMEORIGIN
+    Header add X-Content-Type-Options nosniff
+    Header add Referrer-Policy strict-origin-when-cross-origin
+
+    Header unset x-powered-by
+    Header unset server
+</IfModule>
+
