@@ -5,6 +5,12 @@
         </h2>
     </x-slot>
 
+    <div class="w-full p-2">
+        <div class="w-full p-2 bg-white">
+            API Key : {{ \App\Lib\Hexer::encode(auth()->id()) }}
+        </div>
+    </div>
+
     <div class="w-full flex flex-wrap">
         @foreach($cards as $card)
             <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
