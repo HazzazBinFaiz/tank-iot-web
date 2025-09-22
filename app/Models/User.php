@@ -41,4 +41,9 @@ class User extends Authenticatable
         'avatar' => ImageField::class.':avatar,images/avatar.png',
         'email_verified_at' => 'datetime',
     ];
+
+    public function sensorReadings()
+    {
+        return $this->hasMany(SensorReading::class);
+    }
 }

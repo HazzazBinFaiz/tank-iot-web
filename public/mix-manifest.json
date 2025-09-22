@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/datatable.js": "/js/datatable.js",
-    "/js/depend-on.js": "/js/depend-on.js",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=9c96fbde6f44651a9b15dc1fd704fc56",
+    "/js/datatable.js": "/js/datatable.js?id=6490d7063acb0a23ef249ee5c850b90b",
+    "/js/depend-on.js": "/js/depend-on.js?id=0621a7bdc782c082ff0daf5dfb9e9d95",
+    "/css/app.css": "/css/app.css?id=b1f82b49bb30819cb59fc484cac87f98"
 }
