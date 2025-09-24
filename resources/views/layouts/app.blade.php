@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap"/>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
     {{ $head ?? '' }}
+    <script src="{{ asset('chart.js') }}"></script>
 </head>
 <body class="font-sans antialiased">
 <div
@@ -50,13 +51,11 @@
             <div class="w-full flex flex-col">
                 <x-navigation-link :href="route('dashboard')" :text="__('Dashboard')" />
                 <x-navigation-link :href="route('profile-update.create')" :text="__('Profile')" />
-                @can('user-read')
-                    <x-navigation-link :href="route('user.index')" :text="__('User')" />
-                @endcan
+                <x-navigation-link :href="route('data.index')" :text="__('Data')" />
                 <x-navigation-link :text="__('Security')">
-                    @role('admin')
-                    <x-navigation-link :href="route('laratrust.roles-assignment.index')" :text="__('Access management')" />
-                    @endrole
+{{--                    @role('admin')--}}
+{{--                    <x-navigation-link :href="route('laratrust.roles-assignment.index')" :text="__('Access management')" />--}}
+{{--                    @endrole--}}
                     <x-navigation-link :href="route('password-update.create')" :text="__('Update password')" />
                 </x-navigation-link>
             </div>

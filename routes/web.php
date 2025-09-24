@@ -25,7 +25,10 @@ Route::resource('profile-update', \App\Http\Controllers\ProfileUpdateController:
     ->only(['create','store']);
 
 Route::middleware('auth')->group(function(){
-    Route::resource('user', \App\Http\Controllers\UserController::class);
+//    Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::resource('data', \App\Http\Controllers\SensorDataController::class);
+
+
     Route::get('user/portal/{user}', [\App\Http\Controllers\UserController::class, 'portal'])->name('user.portal');
 
     Route::resource('password-update', \App\Http\Controllers\PasswordUpdateController::class)

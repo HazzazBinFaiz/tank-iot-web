@@ -1,1 +1,51 @@
-document.querySelectorAll("[depend-on]").forEach((function(e){var t=document.getElementById(e.getAttribute("depend-on"));t.addEventListener("change",(function(t){Array.from(e.children).forEach((function(e){e.dataset.parent!=t.target.value?(e.setAttribute("disabled",!0),e.style.display="none"):(e.removeAttribute("disabled"),e.style.display=null)}));var n=Array.from(e.children).filter((function(e){return!e.hasAttribute("disabled")})),l=n.filter((function(e){return e.hasAttribute("selected")}));l.length?e.value=l[0].getAttribute("value"):n.length?e.value=n[0].getAttribute("value"):e.value=null,e.dispatchEvent(new CustomEvent("change",{bubbles:!0,composed:!0,cancelable:!0}))})),t.getAttribute("depend-on")||setTimeout((function(){t.dispatchEvent(new CustomEvent("change",{bubbles:!0,composed:!0,cancelable:!0}))}),10)}));
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!***********************************!*\
+  !*** ./resources/js/depend-on.js ***!
+  \***********************************/
+document.querySelectorAll("[depend-on]").forEach(function (dependentSelect) {
+  var parent = document.getElementById(dependentSelect.getAttribute("depend-on"));
+  parent.addEventListener("change", function (event) {
+    Array.from(dependentSelect.children).forEach(function (option) {
+      if (option.dataset.parent != event.target.value) {
+        option.setAttribute("disabled", true);
+        option.style.display = "none";
+      } else {
+        option.removeAttribute("disabled");
+        option.style.display = null;
+      }
+    });
+    var visibles = Array.from(dependentSelect.children).filter(function (option) {
+      return !option.hasAttribute('disabled');
+    });
+    var visibleSelected = visibles.filter(function (option) {
+      return option.hasAttribute('selected');
+    });
+
+    if (visibleSelected.length) {
+      dependentSelect.value = visibleSelected[0].getAttribute('value');
+    } else if (visibles.length) {
+      dependentSelect.value = visibles[0].getAttribute('value');
+    } else {
+      dependentSelect.value = null;
+    }
+
+    dependentSelect.dispatchEvent(new CustomEvent("change", {
+      bubbles: true,
+      composed: true,
+      cancelable: true
+    }));
+  });
+
+  if (!parent.getAttribute("depend-on")) {
+    setTimeout(function () {
+      parent.dispatchEvent(new CustomEvent("change", {
+        bubbles: true,
+        composed: true,
+        cancelable: true
+      }));
+    }, 10);
+  }
+});
+/******/ })()
+;

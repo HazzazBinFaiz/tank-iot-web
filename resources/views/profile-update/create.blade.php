@@ -17,6 +17,10 @@
                         <td class="p-2 border-t border-b font-semibold">{{ __('Email') }}</td>
                         <td class="p-2 border-t border-b">{{ auth()->user()->email }}</td>
                     </tr>
+                    <tr>
+                        <td class="p-2 border-t border-b font-semibold">{{ __('API Key') }}</td>
+                        <td class="p-2 border-t border-b">{{ \App\Lib\Hexer::encode(auth()->id()) }}</td>
+                    </tr>
                 </table>
             </div>
         </div>

@@ -35,3 +35,49 @@
 .datatable .sorting_desc:after {
     opacity: .8;
 }
+
+
+.water-tank {
+    width: 20em;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2em;
+}
+
+.liquid-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.wave-layer {
+    position: absolute;
+    width: 600%;
+    height: 100%;
+    top: calc(var(--level, 100) * 1%);
+    left: 0;
+    animation: waveLR 10s linear infinite;
+}
+
+@keyframes waveLR {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-16.6666%);
+    }
+}
+
+@keyframes waveRL {
+    0% {
+        transform: translateX(-16.6666%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
